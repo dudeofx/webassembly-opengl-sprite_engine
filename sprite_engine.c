@@ -132,7 +132,7 @@ void ComputeVertices() {
          if ((sprite_buffer[i].o & _ENG_OPT_HFLIP) == _ENG_OPT_HFLIP) u = (1.0f / 8.0f) - u;
           
          float v = sprite_template[j*4+3] / 8.0f;
-         if ((sprite_buffer[i].o & _ENG_OPT_VFLIP) == _ENG_OPT_HFLIP) v = (1.0f / 8.0f) - v;
+         if ((sprite_buffer[i].o & _ENG_OPT_VFLIP) == _ENG_OPT_VFLIP) v = (1.0f / 8.0f) - v;
 
          x *= sprite_buffer[i].s;
          y *= sprite_buffer[i].s;
@@ -183,8 +183,7 @@ void LoadTexture() {
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 }
 //-------------------------------------------------------------------------------
-int main() {
-
+void InitWebGLStuff() {
    EmscriptenWebGLContextAttributes attr;
    emscripten_webgl_init_context_attributes(&attr);
 
@@ -230,6 +229,11 @@ int main() {
    glEnableVertexAttribArray(handle_aTexel);   
 
    glUniform1i(handle_uTexmap, 0);
+}
+//-------------------------------------------------------------------------------
+int main() {
+
+   InitWebGLStuff();
 
    InitScene();
 
